@@ -34,9 +34,7 @@ import android.graphics.drawable.Drawable;
 import android.text.InputFilter;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.method.MovementMethod;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -136,25 +134,25 @@ public class PinView extends AppCompatEditText {
 
         TypedArray a = theme.obtainStyledAttributes(attrs, R.styleable.PinView, defStyleAttr, 0);
 
-        mViewType = a.getInt(R.styleable.PinView_viewType, VIEW_TYPE_RECTANGLE);
-        mPinItemCount = a.getInt(R.styleable.PinView_itemCount, DEFAULT_COUNT);
-        mPinItemHeight = (int) a.getDimension(R.styleable.PinView_itemHeight,
+        mViewType = a.getInt(R.styleable.PinView_pv_viewType, VIEW_TYPE_RECTANGLE);
+        mPinItemCount = a.getInt(R.styleable.PinView_pv_itemCount, DEFAULT_COUNT);
+        mPinItemHeight = (int) a.getDimension(R.styleable.PinView_pv_itemHeight,
                 res.getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
-        mPinItemWidth = (int) a.getDimension(R.styleable.PinView_itemWidth,
+        mPinItemWidth = (int) a.getDimension(R.styleable.PinView_pv_itemWidth,
                 res.getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
-        mPinItemSpacing = a.getDimensionPixelSize(R.styleable.PinView_itemSpacing,
+        mPinItemSpacing = a.getDimensionPixelSize(R.styleable.PinView_pv_itemSpacing,
                 res.getDimensionPixelSize(R.dimen.pv_pin_view_item_spacing));
-        mPinItemRadius = (int) a.getDimension(R.styleable.PinView_itemRadius, 0);
-        mLineWidth = (int) a.getDimension(R.styleable.PinView_lineWidth,
+        mPinItemRadius = (int) a.getDimension(R.styleable.PinView_pv_itemRadius, 0);
+        mLineWidth = (int) a.getDimension(R.styleable.PinView_pv_lineWidth,
                 res.getDimensionPixelSize(R.dimen.pv_pin_view_item_line_width));
-        mLineColor = a.getColorStateList(R.styleable.PinView_lineColor);
+        mLineColor = a.getColorStateList(R.styleable.PinView_pv_lineColor);
         isCursorVisible = a.getBoolean(R.styleable.PinView_android_cursorVisible, true);
-        mCursorColor = a.getColor(R.styleable.PinView_cursorColor, getCurrentTextColor());
-        mCursorWidth = a.getDimensionPixelSize(R.styleable.PinView_cursorWidth,
+        mCursorColor = a.getColor(R.styleable.PinView_pv_cursorColor, getCurrentTextColor());
+        mCursorWidth = a.getDimensionPixelSize(R.styleable.PinView_pv_cursorWidth,
                 res.getDimensionPixelSize(R.dimen.pv_pin_view_cursor_width));
 
         mItemBackground = a.getDrawable(R.styleable.PinView_android_itemBackground);
-        mHideLineWhenFilled = a.getBoolean(R.styleable.PinView_hideLineWhenFilled, false);
+        mHideLineWhenFilled = a.getBoolean(R.styleable.PinView_pv_hideLineWhenFilled, false);
 
         a.recycle();
 
@@ -659,7 +657,7 @@ public class PinView extends AppCompatEditText {
      * @param color A color value in the form 0xAARRGGBB.
      *              Do not pass a resource ID. To get a color value from a resource ID, call
      *              {@link androidx.core.content.ContextCompat#getColor(Context, int) getColor}.
-     * @attr ref R.styleable#PinView_lineColor
+     * @attr ref R.styleable#PinView_pv_lineColor
      * @see #setLineColor(ColorStateList)
      * @see #getLineColors()
      */
@@ -671,7 +669,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Sets the line color.
      *
-     * @attr ref R.styleable#PinView_lineColor
+     * @attr ref R.styleable#PinView_pv_lineColor
      * @see #setLineColor(int)
      * @see #getLineColors()
      */
@@ -687,7 +685,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Gets the line colors for the different states (normal, selected, focused) of the PinView.
      *
-     * @attr ref R.styleable#PinView_lineColor
+     * @attr ref R.styleable#PinView_pv_lineColor
      * @see #setLineColor(ColorStateList)
      * @see #setLineColor(int)
      */
@@ -708,7 +706,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Sets the line width.
      *
-     * @attr ref R.styleable#PinView_lineWidth
+     * @attr ref R.styleable#PinView_pv_lineWidth
      * @see #getLineWidth()
      */
     public void setLineWidth(@Px int borderWidth) {
@@ -728,7 +726,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Sets the count of items.
      *
-     * @attr ref R.styleable#PinView_itemCount
+     * @attr ref R.styleable#PinView_pv_itemCount
      * @see #getItemCount()
      */
     public void setItemCount(int count) {
@@ -748,7 +746,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Sets the radius of square.
      *
-     * @attr ref R.styleable#PinView_itemRadius
+     * @attr ref R.styleable#PinView_pv_itemRadius
      * @see #getItemRadius()
      */
     public void setItemRadius(@Px int itemRadius) {
@@ -768,7 +766,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Specifies extra space between two items.
      *
-     * @attr ref R.styleable#PinView_itemSpacing
+     * @attr ref R.styleable#PinView_pv_itemSpacing
      * @see #getItemSpacing()
      */
     public void setItemSpacing(@Px int itemSpacing) {
@@ -788,7 +786,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Sets the height of item.
      *
-     * @attr ref R.styleable#PinView_itemHeight
+     * @attr ref R.styleable#PinView_pv_itemHeight
      * @see #getItemHeight()
      */
     public void setItemHeight(@Px int itemHeight) {
@@ -808,7 +806,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Sets the width of item.
      *
-     * @attr ref R.styleable#PinView_itemWidth
+     * @attr ref R.styleable#PinView_pv_itemWidth
      * @see #getItemWidth()
      */
     public void setItemWidth(@Px int itemWidth) {
@@ -841,7 +839,7 @@ public class PinView extends AppCompatEditText {
      *
      * @param hideLineWhenFilled true to hide line on a position where text entered,
      *                           false to always show line
-     * @attr ref R.styleable#PinView_hideLineWhenFilled
+     * @attr ref R.styleable#PinView_pv_hideLineWhenFilled
      */
     public void setHideLineWhenFilled(boolean hideLineWhenFilled) {
         this.mHideLineWhenFilled = hideLineWhenFilled;
@@ -860,6 +858,7 @@ public class PinView extends AppCompatEditText {
     }
 
     //region ItemBackground
+
     /**
      * Set the item background to a given resource. The resource should refer to
      * a Drawable object or 0 to remove the item background.
@@ -908,7 +907,7 @@ public class PinView extends AppCompatEditText {
     /**
      * Sets the width (in pixels) of cursor.
      *
-     * @attr ref R.styleable#PinView_cursorWidth
+     * @attr ref R.styleable#PinView_pv_cursorWidth
      * @see #getCursorWidth()
      */
     public void setCursorWidth(@Px int width) {
@@ -932,7 +931,7 @@ public class PinView extends AppCompatEditText {
      * @param color A color value in the form 0xAARRGGBB.
      *              Do not pass a resource ID. To get a color value from a resource ID, call
      *              {@link androidx.core.content.ContextCompat#getColor(Context, int) getColor}.
-     * @attr ref R.styleable#PinView_cursorColor
+     * @attr ref R.styleable#PinView_pv_cursorColor
      * @see #getCursorColor()
      */
     public void setCursorColor(@ColorInt int color) {
