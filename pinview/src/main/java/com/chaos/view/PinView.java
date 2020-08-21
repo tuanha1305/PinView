@@ -33,12 +33,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.MovementMethod;
+import android.text.method.TransformationMethod;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -116,6 +115,8 @@ public class PinView extends AppCompatEditText {
 
     private boolean mHideLineWhenFilled;
 
+    private String mTransformed;
+
     public PinView(Context context) {
         this(context, null);
     }
@@ -171,6 +172,7 @@ public class PinView extends AppCompatEditText {
         mPaint.setStrokeWidth(mLineWidth);
         setupAnimator();
 
+        setTransformationMethod(null);
         disableSelectionMenu();
     }
 
@@ -275,6 +277,13 @@ public class PinView extends AppCompatEditText {
                 }
             }
         }
+
+        TransformationMethod transformation = getTransformationMethod();
+        if (transformation == null) {
+            mTransformed = getText().toString();
+        } else {
+            mTransformed = transformation.getTransformation(getText(), this).toString();
+        }
     }
 
     @Override
@@ -357,8 +366,8 @@ public class PinView extends AppCompatEditText {
                 drawAnchorLine(canvas);
             }
 
-            if (getText().length() > i) {
-                if (isPasswordInputType(getInputType())) {
+            if (mTransformed.length() > i) {
+                if (getTransformationMethod() == null && isPasswordInputType(getInputType())) {
                     drawCircle(canvas, i);
                 } else {
                     drawText(canvas, i);
@@ -552,7 +561,7 @@ public class PinView extends AppCompatEditText {
         // =, Rect(4, -26, 26, -10)
         // -, Rect(1, -19, 14, -14)
         // +, Rect(2, -32, 29, -3)
-        drawTextAtBox(canvas, paint, getText(), i);
+        drawTextAtBox(canvas, paint, mTransformed, i);
     }
 
     private void drawHint(Canvas canvas, int i) {

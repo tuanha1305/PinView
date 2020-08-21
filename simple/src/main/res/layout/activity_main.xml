@@ -87,14 +87,14 @@
             app:pv_itemCount="2" />
 
         <com.chaos.view.PinView
+            android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberPassword"
-            android:itemBackground="@mipmap/ic_launcher"
             android:padding="@dimen/common_padding"
-            android:text="1"
+            android:text="12"
             android:textColor="@color/colorAccent"
-            app:pv_itemCount="1" />
+            app:pv_itemCount="2" />
 
     </LinearLayout>
 </ScrollView>
